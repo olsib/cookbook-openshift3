@@ -78,6 +78,13 @@ node['cookbook-openshift3']['core_packages'].each do |pkg|
   package pkg
 end
 
+bash "enable extra repo" do
+  code <<-EOF
+    yum-config-manager --enable rhui-REGION-rhel-server-extras
+  EOF
+end
+
+
 package 'docker' do
   version node['cookbook-openshift3']['docker_version'] unless node['cookbook-openshift3']['docker_version'].nil?
 end

@@ -31,3 +31,5 @@ service 'NetworkManager'
 service 'openvswitch'
 
 include_recipe 'cookbook-openshift3::common'
+include_recipe 'cookbook-openshift3::master'
+include_recipe 'cookbook-openshift3::node'

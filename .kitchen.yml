@@ -1,0 +1,63 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: ubuntu-chef 
+  security_group_ids: ["sg-3114de56"]
+  region: us-east-1
+  availability_zone: us-east-1b
+  require_chef_omnibus: true
+  subnet_id: subnet-1b5d5730
+#  iam_profile_name: chef-client
+  instance_type: t2.micro
+  associate_public_ip: true
+  interface: dns
+
+
+transport:
+   username: ec2-user 
+   ssh_key: "/root/.ssh/ubuntu-chef"
+
+provisioner:
+  name: chef_solo
+  environments_path: environments
+  roles_path: roles
+  solo_rb:
+    node_name: openshift-redhat-72	
+    environment: single1
+#    role: base
+
+platforms:
+  - name: redhat-7.2
+    driver:
+      image_id: ami-2051294a
+    transport:
+      username: ec2-user
+
+suites:
+  - name: openshift 
+    roles_path: roles
+    run_list:
+#      - "role[base]"
+#      - recipe[cookbook-openshift3]
+#      - recipe[cookbook-openshift3::common]
+      - recipe[cookbook-openshift3::master]
+#      - recipe[cookbook-openshift3::node]
+
+#      - "role[singlenode_install]"
+#    attributes: { 
+#	node['cookbook-openshift3']['openshift_master_identity_provider']['HTPasswdPasswordIdentityProvider']: 
+#	[	
+#	name: htpasswd_auth
+#	login: true
+#	challenge: true
+#	kind: HTPasswdPasswordIdentityProvider
+#	filename: "/etc/openshift/openshift-passwd"
+#
+#
+#	],
+#	}	 
+#    provisioner:
+#      solo_rb:
+#        node_name: openshift-redhat-72
+#        environment: single1 
+#        run_list: ["role[base]"]

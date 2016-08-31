@@ -4,8 +4,8 @@
 #
 # Copyright (c) 2015 The Authors, All Rights Reserved.
 
-include_recipe 'iptables::default'
-include_recipe 'selinux_policy::default'
+#include_recipe 'iptables::default'
+#include_recipe 'selinux_policy::default'
 
 if node['cookbook-openshift3']['set_nameserver']
   if node['cookbook-openshift3']['nameserver']['nameservers'].empty? || node['cookbook-openshift3']['nameserver']['nameservers'][0].empty?

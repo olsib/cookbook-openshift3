@@ -5,7 +5,7 @@
 # Copyright (c) 2015 The Authors, All Rights Reserved.
 
 provides :openshift_create_master
-resource_name :openshift_create_master
+#resource_name :openshift_create_master
 
 actions :create
 

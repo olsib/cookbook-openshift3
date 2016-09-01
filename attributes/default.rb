@@ -11,10 +11,10 @@ default['cookbook-openshift3']['openshift_cluster_name'] = nil
 default['cookbook-openshift3']['openshift_master_cluster_vip'] = nil
 default['cookbook-openshift3']['openshift_HA'] = false
 default['cookbook-openshift3']['openshift_HA_method'] = 'native'
-default['cookbook-openshift3']['master_servers'] = []
+default['cookbook-openshift3']['master_servers'] = [{"fqdn" => "openshift1.localdomain", "ipaddress" => "10.35.196.18"}]
 default['cookbook-openshift3']['master_peers'] = []
 default['cookbook-openshift3']['etcd_servers'] = []
-default['cookbook-openshift3']['node_servers'] = []
+default['cookbook-openshift3']['node_servers'] = [{"fqdn" => "openshift1.localdomain", "ipaddress" => "10.35.196.18"}]
 
 if node['cookbook-openshift3']['openshift_HA']
   default['cookbook-openshift3']['openshift_common_public_hostname'] = node['cookbook-openshift3']['openshift_cluster_name']
@@ -28,7 +28,7 @@ else
   default['cookbook-openshift3']['master_etcd_cert_prefix'] = ''
 end
 
-default['cookbook-openshift3']['deploy_containerized'] = false
+default['cookbook-openshift3']['deploy_containerized'] = true 
 default['cookbook-openshift3']['deploy_example'] = false
 default['cookbook-openshift3']['deploy_dnsmasq'] = false
 default['cookbook-openshift3']['docker_version'] = nil
@@ -44,7 +44,7 @@ default['cookbook-openshift3']['enabled_firewall_rules_master_cluster'] = %w(fir
 default['cookbook-openshift3']['enabled_firewall_rules_node'] = %w(firewall_node)
 default['cookbook-openshift3']['enabled_firewall_additional_rules_node'] = []
 default['cookbook-openshift3']['enabled_firewall_rules_etcd'] = %w(firewall_etcd)
-default['cookbook-openshift3']['openshift_deployment_type'] = 'enterprise'
+default['cookbook-openshift3']['openshift_deployment_type'] = 'origin'
 default['cookbook-openshift3']['openshift_service_type'] = node['cookbook-openshift3']['openshift_deployment_type'] =~ /enterprise/ ? 'atomic-openshift' : 'origin'
 default['cookbook-openshift3']['yum_repositories'] = node['cookbook-openshift3']['openshift_deployment_type'] =~ /enterprise/ ? %w() : [{ 'name' => 'centos-openshift-origin', 'baseurl' => 'http://mirror.centos.org/centos/7/paas/x86_64/openshift-origin/', 'gpgcheck' => false }]
 default['cookbook-openshift3']['openshift_data_dir'] = '/var/lib/origin'

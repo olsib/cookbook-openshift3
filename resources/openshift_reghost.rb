@@ -5,7 +5,7 @@
 # Copyright (c) 2015 The Authors, All Rights Reserved.
 
 provides :openshift_reghost
-resource_name :openshift_reghost
+#resource_name :openshift_reghost
 
 actions :create, :delete
 

@@ -5,7 +5,7 @@
 # Copyright (c) 2015 The Authors, All Rights Reserved.
 
 provides :openshift_setup_cluster
-resource_name :openshift_setup_cluster
+#resource_name :openshift_setup_cluster
 
 actions :setup, :init
 

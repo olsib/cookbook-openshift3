@@ -1,0 +1,36 @@
+# This section reads the config file (/etc/sysconfig/docker-storage-setup)
+# Currently supported options:
+#
+# DEVS=
+# A quoted, space-separated list of devices to be used.  This currently
+# expects the devices to be unpartitioned drives.  If "VG" is not specified,
+# then use of the root disk's extra space is implied.
+#
+# Ex. DEVS=/dev/vdb
+<% if node['cookbook-openshift3']['openshift_node_docker-storage'].has_key?('DEVS') -%>
+DEVS="<%= node['cookbook-openshift3']['openshift_node_docker-storage']['DEVS'].join(' ') %>"
+<% end -%>
+# VG=
+# The volume group to use for docker storage.  Defaults to the
+# volume group where the root filesystem resides.  If VG is specified and the
+# volume group does not exist, it will be created (which requires that "DEVS"
+# be nonempty, since we don't currently support putting a second partition on
+# the root disk).
+#
+# Ex. VG=docker-vg
+<% if node['cookbook-openshift3']['openshift_node_docker-storage'].has_key?('VG') -%>
+VG="<%= node['cookbook-openshift3']['openshift_node_docker-storage']['VG'] %>"
+<% end -%>
+#
+#
+# DATA_SIZE=
+# The data size can take values acceptable to "lvcreate -L" as well as some
+# values acceptable to to "lvcreate -l". If user intends to pass values
+# acceptable to "lvcreate -l", then only those values which contains "%"
+# in syntax are acceptable.  If value does not contain "%" it is assumed
+# value is suitable for "lvcreate -L".
+#
+# Ex. DATA_SIZE=40%FREE
+<% if node['cookbook-openshift3']['openshift_node_docker-storage'].has_key?('DATA_SIZE') -%>
+DATA_SIZE="<%= node['cookbook-openshift3']['openshift_node_docker-storage']['DATA_SIZE'] %>"
+<% end -%>

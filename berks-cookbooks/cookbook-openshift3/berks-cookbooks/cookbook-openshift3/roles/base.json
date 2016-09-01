@@ -1,0 +1,20 @@
+{
+  "name": "base",
+  "description": "Common Base Role",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[cookbook-openshift3]",
+    "recipe[cookbook-openshift3::common]",
+    "recipe[cookbook-openshift3::master]",
+    "recipe[cookbook-openshift3::node]"
+  ],
+  "env_run_lists": {
+
+  }
+}

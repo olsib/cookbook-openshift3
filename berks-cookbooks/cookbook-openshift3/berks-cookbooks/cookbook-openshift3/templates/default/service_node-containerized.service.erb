@@ -1,0 +1,26 @@
+[Unit]
+After=<%= node['cookbook-openshift3']['openshift_service_type'] %>-master.service
+After=docker.service
+After=openvswitch.service
+PartOf=docker.service
+Requires=docker.service
+<% if node['cookbook-openshift3']['openshift_common_use_openshift_sdn'] == true %>
+Requires=openvswitch.service
+<%- end %>
+Wants=<%= node['cookbook-openshift3']['openshift_service_type'] %>-master.service
+Requires=<%= node['cookbook-openshift3']['openshift_service_type'] %>-node-dep.service
+After=<%= node['cookbook-openshift3']['openshift_service_type'] %>-node-dep.service
+
+[Service]
+EnvironmentFile=/etc/sysconfig/<%= node['cookbook-openshift3']['openshift_service_type'] %>-node
+EnvironmentFile=/etc/sysconfig/<%= node['cookbook-openshift3']['openshift_service_type'] %>-node-dep
+ExecStartPre=-/usr/bin/docker rm -f <%= node['cookbook-openshift3']['openshift_service_type'] %>-node
+ExecStart=/usr/bin/docker run --name <%= node['cookbook-openshift3']['openshift_service_type'] %>-node --rm --privileged --net=host --pid=host --env-file=/etc/sysconfig/<%= node['cookbook-openshift3']['openshift_service_type'] %>-node -v /:/rootfs:ro -e CONFIG_FILE=${CONFIG_FILE} -e OPTIONS=${OPTIONS} -e HOST=/rootfs -e HOST_ETC=/host-etc -v <%= node['cookbook-openshift3']['openshift_data_dir'] %>:<%= node['cookbook-openshift3']['openshift_data_dir'] %> -v <%= node['cookbook-openshift3']['openshift_common_base_dir'] %>/node:<%= node['cookbook-openshift3']['openshift_common_base_dir'] %>/node -v /etc/localtime:/etc/localtime:ro -v /etc/machine-id:/etc/machine-id:ro -v /run:/run -v /sys:/sys:ro -v /usr/bin/docker:/usr/bin/docker:ro -v /var/lib/docker:/var/lib/docker -v /lib/modules:/lib/modules -v /etc/origin/openvswitch:/etc/openvswitch -v /etc/origin/sdn:/etc/openshift-sdn -v /etc/systemd/system:/host-etc/systemd/system -v /var/log:/var/log -v /dev:/dev $DOCKER_ADDTL_BIND_MOUNTS <%= node['cookbook-openshift3']['openshift_docker_node_image'] %>:${IMAGE_VERSION}
+ExecStartPost=/usr/bin/sleep 10
+ExecStop=/usr/bin/docker stop <%= node['cookbook-openshift3']['openshift_service_type'] %>-node
+SyslogIdentifier=<%= node['cookbook-openshift3']['openshift_service_type'] %>-node
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=docker.service

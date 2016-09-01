@@ -1,0 +1,57 @@
+{
+  "name": "single",
+  "description": "",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+    "cookbook-openshift3": {
+      "master_servers": [
+        {
+          "fqdn": "ip-10-35-229-99.ec2.internal",
+          "ipaddress": "10.35.229.99"
+        }
+      ],
+      "node_servers": [
+        {
+          "fqdn": "ip-10-35-229-99.ec2.internal",
+          "ipaddress": "10.35.229.99"
+        },
+        {
+          "fqdn": "ip-10-35-229-99.ec2.internal",
+          "ipaddress": "10.35.229.99"
+        }
+      ],
+      "openshift_master_identity_provider": [
+      { 
+  	"HTPasswdPasswordIdentityProvider": 
+        {
+	  "name" : "htpasswd_auth", 
+   	  "login" : true, 
+          "challenge" : true, 
+          "kind" : "HTPasswdPasswordIdentityProvider", 
+          "filename" : "/etc/openshift/openshift-passwd"
+	},
+        "LDAPPasswordIdentityProvider":
+	{
+	  "name" : "ldap_identity", 
+	  "login" : true, 
+	  "challenge" : true, 
+	  "kind" : "LDAPPasswordIdentityProvider", 
+	  "ldap_server" : "ldap.domain.local",
+	  "ldap_bind_dn" : "", 
+	  "ldap_bind_password" : "",
+	  "ldap_insecure" : true, 
+	  "ldap_base_ou" : "OU=people,DC=domain,DC=local", 
+	  "ldap_preferred_username" : "uid"
+   	}
+      }
+      ]	
+    }
+  }
+}

@@ -1,0 +1,46 @@
+allowDisabledDocker: false
+apiVersion: v1
+dnsDomain: <%=node['cookbook-openshift3']['osn_cluster_dns_domain'] %>
+dockerConfig:
+  execHandlerName: ""
+iptablesSyncPeriod: "<%= node['cookbook-openshift3']['openshift_node_iptables_sync_period'] %>"
+imageConfig:
+  format: <%= node['cookbook-openshift3']['openshift_common_registry_url'] %>
+  latest: false
+kind: NodeConfig
+<% if node['cookbook-openshift3']['use_wildcard_nodes'] %>
+masterKubeConfig: system:node:wildcard_nodes.kubeconfig
+<%- else -%>
+masterKubeConfig: system:node:<%= node['fqdn'] %>.kubeconfig
+<%- end -%>
+networkPluginName: <%= node['cookbook-openshift3']['openshift_common_sdn_network_plugin_name'] %>
+# networkConfig struct introduced in origin 1.0.6 and OSE 3.0.2 which
+# deprecates networkPluginName above. The two should match.
+networkConfig:
+   mtu: <%= node['cookbook-openshift3']['openshift_node_sdn_mtu_sdn'] %>
+   networkPluginName: <%= node['cookbook-openshift3']['openshift_common_sdn_network_plugin_name'] %>
+nodeIP: <%= node['cookbook-openshift3']['openshift_common_ip'] %>
+nodeName: <%= node['fqdn'] %>
+podManifestConfig:
+servingInfo:
+  bindAddress: 0.0.0.0:10250
+  certFile: server.crt
+  clientCA: ca.crt
+  keyFile: server.key
+volumeDirectory: <%= node['cookbook-openshift3']['openshift_data_dir'] %>/openshift.local.volumes
+kubeletArguments:
+  max-pods:
+    - "<%= node['cookbook-openshift3']['openshift_node_max_pod'] %>"
+  minimum-container-ttl-duration:
+    - "<%= node['cookbook-openshift3']['openshift_node_minimum_container_ttl_duration'] %>"
+  maximum-dead-containers-per-container:
+    - "<%= node['cookbook-openshift3']['openshift_node_maximum_dead_containers_per_container'] %>"
+  maximum-dead-containers:
+    - "<%= node['cookbook-openshift3']['openshift_node_maximum_dead_containers'] %>"
+  image-gc-high-threshold:
+    - "<%= node['cookbook-openshift3']['openshift_node_image_gc_high_threshold'] %>"
+  image-gc-low-threshold:
+    - "<%= node['cookbook-openshift3']['openshift_node_image_gc_low_threshold'] %>"
+proxyArguments:
+  proxy-mode:
+    - iptables

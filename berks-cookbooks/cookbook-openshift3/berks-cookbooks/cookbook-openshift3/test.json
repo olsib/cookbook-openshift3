@@ -1,0 +1,7 @@
+{
+"name" : "htpasswd_auth", 
+"login" : true, 
+"challenge" : true, 
+"kind" : "HTPasswdPasswordIdentityProvider", 
+"filename" : "/etc/openshift/openshift-passwd"
+}

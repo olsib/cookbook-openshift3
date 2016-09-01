@@ -5,10 +5,10 @@ DEPENDENCIES
 
 GRAPH
   cookbook-openshift3 (1.10.14)
-    iptables (>= 1.0.0)
+    iptables (= 1.1.0)
     selinux_policy (>= 0.0.0)
     yum (>= 0.0.0)
-  iptables (2.2.0)
+  iptables (1.1.0)
   selinux_policy (0.9.5)
     yum (~> 3.9)
   yum (3.12.0)

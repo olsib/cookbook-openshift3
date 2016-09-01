@@ -10,7 +10,7 @@ version '1.10.14'
 supports 'redhat', '>= 7.1'
 supports 'centos', '>= 7.1'
 
-depends 'iptables', '>= 1.0.0'
+depends 'iptables', ' = 1.1.0'
 depends 'selinux_policy'
 depends 'yum'
 

@@ -1,0 +1,15 @@
+DEPENDENCIES
+  selinux
+  selinux_policy
+    path: .
+    metadata: true
+  selinux_policy_test
+    path: test/cookbooks/selinux_policy_test
+
+GRAPH
+  selinux (0.9.0)
+  selinux_policy (0.9.5)
+    yum (~> 3.9)
+  selinux_policy_test (0.1.0)
+    selinux_policy (>= 0.0.0)
+  yum (3.9.0)

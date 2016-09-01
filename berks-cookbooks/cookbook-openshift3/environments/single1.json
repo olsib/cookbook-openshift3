@@ -1,0 +1,28 @@
+{
+  "name": "single",
+  "description": "",
+  "cookbook_versions": {
+
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+    "cookbook-openshift3": {
+      "master_servers": [
+        {
+          "fqdn": "ip-10-35-229-99.ec2.internal",
+          "ipaddress": "127.0.0.1"
+        }
+      ],
+      "node_servers": [
+        {
+          "fqdn": "ip-10-35-229-99.ec2.internal",
+          "ipaddress": "127.0.0.1"
+        }
+      ]
+    }
+  }
+}

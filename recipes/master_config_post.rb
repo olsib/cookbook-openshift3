@@ -3,6 +3,9 @@
 # Recipe:: master_config_post
 #
 # Copyright (c) 2015 The Authors, All Rights Reserved.
+require 'chef/log'
+Chef::Log.level = :debug
+
 
 service_accounts = node['cookbook-openshift3']['openshift_common_service_accounts_additional'].any? ? node['cookbook-openshift3']['openshift_common_service_accounts'] + node['cookbook-openshift3']['openshift_common_service_accounts_additional'] : node['cookbook-openshift3']['openshift_common_service_accounts']
 

@@ -3,6 +3,9 @@
 # Recipe:: default
 #
 # Copyright (c) 2015 The Authors, All Rights Reserved.
+require 'chef/log'
+Chef::Log.level = :debug
+
 
 service "#{node['cookbook-openshift3']['openshift_service_type']}-master"
 

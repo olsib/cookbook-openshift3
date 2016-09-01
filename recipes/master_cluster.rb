@@ -3,6 +3,9 @@
 # Recipe:: master_cluster
 #
 # Copyright (c) 2015 The Authors, All Rights Reserved.
+require 'chef/log'
+Chef::Log.level = :debug
+
 
 master_servers = node['cookbook-openshift3']['use_params_roles'] && !Chef::Config[:solo] ? search(:node, %(role:"#{node['cookbook-openshift3']['master_servers']}")).sort! : node['cookbook-openshift3']['master_servers']
 etcd_servers = node['cookbook-openshift3']['use_params_roles'] && !Chef::Config[:solo] ? search(:node, %(role:"#{node['cookbook-openshift3']['etcd_servers']}")).sort! : node['cookbook-openshift3']['etcd_servers']

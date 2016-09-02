@@ -30,11 +30,11 @@ if master_servers.find { |server_master| server_master['fqdn'] == node['fqdn'] }
     notifies :enable, 'service[httpd]', :immediately
   end
 
-  node['cookbook-openshift3']['enabled_firewall_rules_master'].each do |rule|
-    iptables_rule rule do
-      action :enable
-    end
-  end
+#  node['cookbook-openshift3']['enabled_firewall_rules_master'].each do |rule|
+#    iptables_rule rule do
+#      action :enable
+#    end
+#  end
 
   directory node['cookbook-openshift3']['openshift_master_config_dir'] do
     recursive true

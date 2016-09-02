@@ -94,11 +94,11 @@ else
   Chef::Application.fatal!("ETCD Servers should has length of 2n + 1 and nor \"#{etcd_servers.length}\"")
 end
 
-node['cookbook-openshift3']['enabled_firewall_rules_etcd'].each do |rule|
-  iptables_rule rule do
-    action :enable
-  end
-end
+#node['cookbook-openshift3']['enabled_firewall_rules_etcd'].each do |rule|
+#  iptables_rule rule do
+#    action :enable
+#  end
+#end
 
 package 'etcd'
 

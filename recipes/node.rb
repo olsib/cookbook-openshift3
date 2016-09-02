@@ -18,11 +18,11 @@ if node_servers.find { |server_node| server_node['fqdn'] == node['fqdn'] }
     group 'root'
   end
 
-#  node['cookbook-openshift3']['enabled_firewall_rules_node'].each do |rule|
-#    iptables_rule rule do
-#      action :enable
-#    end
-#  end
+  node['cookbook-openshift3']['enabled_firewall_rules_node'].each do |rule|
+    iptables_rule rule do
+      action :enable
+    end
+  end
 
   directory node['cookbook-openshift3']['openshift_node_config_dir'] do
     recursive true

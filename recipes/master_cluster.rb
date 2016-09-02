@@ -11,11 +11,11 @@ master_servers = node['cookbook-openshift3']['use_params_roles'] && !Chef::Confi
 etcd_servers = node['cookbook-openshift3']['use_params_roles'] && !Chef::Config[:solo] ? search(:node, %(role:"#{node['cookbook-openshift3']['etcd_servers']}")).sort! : node['cookbook-openshift3']['etcd_servers']
 master_peers = node['cookbook-openshift3']['use_params_roles'] && !Chef::Config[:solo] ? search(:node, %(role:"#{node['cookbook-openshift3']['master_servers']}" NOT name:"#{master_servers.first['fqdn']}")) : node['cookbook-openshift3']['master_peers']
 
-#node['cookbook-openshift3']['enabled_firewall_rules_master_cluster'].each do |rule|
-#  iptables_rule rule do
-#    action :enable
-#  end
-#end
+node['cookbook-openshift3']['enabled_firewall_rules_master_cluster'].each do |rule|
+  iptables_rule rule do
+    action :enable
+  end
+end
 
 if master_servers.first['fqdn'] == node['fqdn']
   master_servers.each do |master_server|

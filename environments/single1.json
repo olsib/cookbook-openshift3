@@ -13,13 +13,13 @@
     "cookbook-openshift3": {
       "master_servers": [
         {
-          "fqdn": "ip-10-35-229-99.ec2.internal",
+          "fqdn": "localhost",
           "ipaddress": "127.0.0.1"
         }
       ],
       "node_servers": [
         {
-          "fqdn": "ip-10-35-229-99.ec2.internal",
+          "fqdn": "localhost",
           "ipaddress": "127.0.0.1"
         }
       ]

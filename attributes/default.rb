@@ -11,10 +11,12 @@ default['cookbook-openshift3']['openshift_cluster_name'] = nil
 default['cookbook-openshift3']['openshift_master_cluster_vip'] = nil
 default['cookbook-openshift3']['openshift_HA'] = false
 default['cookbook-openshift3']['openshift_HA_method'] = 'native'
-default['cookbook-openshift3']['master_servers'] = [{"fqdn" => "openshift1.localdomain", "ipaddress" => "10.35.196.18"}]
+#default['cookbook-openshift3']['master_servers'] = [{"fqdn" => "openshift1.localdomain", "ipaddress" => "10.35.196.18"}]
+default['cookbook-openshift3']['master_servers'] = []
 default['cookbook-openshift3']['master_peers'] = []
 default['cookbook-openshift3']['etcd_servers'] = []
-default['cookbook-openshift3']['node_servers'] = [{"fqdn" => "openshift1.localdomain", "ipaddress" => "10.35.196.18"}]
+#default['cookbook-openshift3']['node_servers'] = [{"fqdn" => "openshift1.localdomain", "ipaddress" => "10.35.196.18"}]
+default['cookbook-openshift3']['node_servers'] = []
 
 if node['cookbook-openshift3']['openshift_HA']
   default['cookbook-openshift3']['openshift_common_public_hostname'] = node['cookbook-openshift3']['openshift_cluster_name']

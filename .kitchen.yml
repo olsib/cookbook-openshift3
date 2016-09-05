@@ -37,10 +37,10 @@ suites:
   - name: openshift 
     roles_path: roles
     run_list:
-#      - "role[base]"
+      - "role[base]"
 #      - recipe[cookbook-openshift3]
 #      - recipe[cookbook-openshift3::common]
-      - recipe[cookbook-openshift3::master]
+#      - recipe[cookbook-openshift3::master]
 #      - recipe[cookbook-openshift3::node]
 
 #      - "role[singlenode_install]"
